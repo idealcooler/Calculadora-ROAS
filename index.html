@@ -34,10 +34,10 @@
     <h2>Calculadora de Preco com ROAS</h2>
     
     <label for="roas">ROAS (%)</label><br>
-    <input type="number" id="roas" placeholder="Ex: 400"><br>
+    <input type="number" id="roas" placeholder="Ex: 500"><br>
     
-    <label for="preco">Valor Atual (R$)</label><br>
-    <input type="number" id="preco" placeholder="Ex: 100"><br>
+    <label for="preco">Preço Atual (R$)</label><br>
+    <input type="number" id="preco" placeholder="Ex: 500"><br>
 
     <button id="calcular">Calcular</button>
 
@@ -55,12 +55,11 @@
                     return;
                 }
 
-                // Calculando aumento necessário
-                let percentualCusto = 100 / roas;
-                let aumentoNecessario = (percentualCusto / (100 - percentualCusto)) * 100;
-                let novoPreco = preco * (1 + aumentoNecessario / 100);
+                // Calculando o novo preço com a fórmula correta
+                let novoPreco = preco * (1 + (roas - 100) / 100);
 
-                document.getElementById("resultado").innerText = "Novo preço: R$ " + novoPreco.toFixed(2);
+                // Exibe o novo preço com "R$"
+                document.getElementById("resultado").innerText = "R$ " + novoPreco.toFixed(2);
             });
         });
     </script>
