@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Preco com ROAS</title>
+    <title>Calculadora de Preco com ROAS e Custo Operacional</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,13 +31,19 @@
     </style>
 </head>
 <body>
-    <h2>Calculadora de Preco com ROAS</h2>
+    <h2>Calculadora de Preco com ROAS e Custo Operacional</h2>
     
     <label for="roas">ROAS (%)</label><br>
     <input type="number" id="roas" placeholder="Ex: 500"><br>
     
     <label for="preco">Preço Atual (R$)</label><br>
     <input type="number" id="preco" placeholder="Ex: 500"><br>
+    
+    <label for="faturamento">Faturamento Desejado (R$)</label><br>
+    <input type="number" id="faturamento" placeholder="Ex: 2000"><br>
+    
+    <label for="custoOperacional">Custo Operacional (R$ ou %)</label><br>
+    <input type="number" id="custoOperacional" placeholder="Ex: 100 ou 10%"><br>
 
     <button id="calcular">Calcular</button>
 
@@ -48,18 +54,30 @@
             document.getElementById("calcular").addEventListener("click", function() {
                 let roas = parseFloat(document.getElementById("roas").value);
                 let preco = parseFloat(document.getElementById("preco").value);
+                let faturamento = parseFloat(document.getElementById("faturamento").value);
+                let custoOperacional = parseFloat(document.getElementById("custoOperacional").value);
 
                 // Verifica se os valores foram inseridos corretamente
-                if (isNaN(roas) || isNaN(preco) || roas <= 0 || preco <= 0) {
+                if (isNaN(roas) || isNaN(preco) || isNaN(faturamento) || isNaN(custoOperacional) || roas <= 0 || preco <= 0 || faturamento <= 0) {
                     document.getElementById("resultado").innerText = "Por favor, insira valores válidos.";
                     return;
                 }
 
-                // Fórmula corrigida
-                let novoPreco = preco / (1 - (100 / (roas + 100)));
+                // Verifica se o custo operacional é uma porcentagem ou valor fixo
+                let custoOperacionalFinal;
+                if (custoOperacional < 1) {
+                    // Considera como porcentagem
+                    custoOperacionalFinal = preco * custoOperacional / 100;
+                } else {
+                    // Considera como valor fixo
+                    custoOperacionalFinal = custoOperacional;
+                }
+
+                // Cálculo do novo preço com ROAS e custo operacional
+                let novoPreco = (preco + custoOperacionalFinal) / (1 - (100 / (roas + 100)));
 
                 // Exibe o novo preço com "R$"
-                document.getElementById("resultado").innerText = "R$ " + novoPreco.toFixed(2);
+                document.getElementById("resultado").innerText = "Novo Preço: R$ " + novoPreco.toFixed(2);
             });
         });
     </script>
