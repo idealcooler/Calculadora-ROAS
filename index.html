@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Preco com ROAS</title>
+    <title>Calculadora de Preço com ROAS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,10 +31,11 @@
     </style>
 </head>
 <body>
-    <h2>Calculadora de Preco com ROAS</h2>
+    <h2>Calculadora de Preço com ROAS</h2>
     
     <label for="roas">ROAS (%)</label><br>
-    <input type="number" id="roas" placeholder="Ex: 500"><br>
+    <input type="number" id="roas" placeholder="Ex: 500" oninput="atualizarPorcentagem()">
+    <span id="porcentagemGasto">Gasto por venda: 0%</span><br>
     
     <label for="preco">Preço Atual (R$)</label><br>
     <input type="number" id="preco" placeholder="Ex: 500"><br>
@@ -62,6 +63,16 @@
                 document.getElementById("resultado").innerText = "R$ " + novoPreco.toFixed(2);
             });
         });
+
+        function atualizarPorcentagem() {
+            let roas = parseFloat(document.getElementById("roas").value);
+            if (!isNaN(roas) && roas > 0) {
+                let porcentagem = (100 / (roas + 100)) * 100;
+                document.getElementById("porcentagemGasto").innerText = Gasto por venda: ${porcentagem.toFixed(2)}%;
+            } else {
+                document.getElementById("porcentagemGasto").innerText = "Gasto por venda: 0%";
+            }
+        }
     </script>
 </body>
 </html>
