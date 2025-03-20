@@ -49,8 +49,8 @@
                 let roas = parseFloat(document.getElementById("roas").value);
                 let preco = parseFloat(document.getElementById("preco").value);
 
-                // Verifica se o JavaScript está funcionando
-                alert(ROAS: ${roas}, Preço: ${preco}); // Exibe um alerta com os valores dos campos
+                // Verifica se o JavaScript está funcionando corretamente
+                alert("ROAS: " + roas + ", Preço: " + preco); // Corrigido o alerta
 
                 if (isNaN(roas) || isNaN(preco) || roas <= 0 || preco <= 0) {
                     document.getElementById("resultado").innerText = "Por favor, insira valores válidos.";
