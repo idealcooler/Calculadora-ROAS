@@ -55,8 +55,8 @@
                     return;
                 }
 
-                // Calculando o novo preço com a fórmula correta
-                let novoPreco = preco * (1 + (roas - 100) / 100);
+                // Fórmula corrigida
+                let novoPreco = preco / (1 - (100 / (roas + 100)));
 
                 // Exibe o novo preço com "R$"
                 document.getElementById("resultado").innerText = "R$ " + novoPreco.toFixed(2);
