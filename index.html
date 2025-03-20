@@ -55,11 +55,12 @@
                     return;
                 }
 
+                // Calculando aumento necessário
                 let percentualCusto = 100 / roas;
                 let aumentoNecessario = (percentualCusto / (100 - percentualCusto)) * 100;
                 let novoPreco = preco * (1 + aumentoNecessario / 100);
 
-                document.getElementById("resultado").innerText = Novo valor: R$ ${novoPreco.toFixed(2)};
+                document.getElementById("resultado").innerText = "Novo preço: R$ " + novoPreco.toFixed(2);
             });
         });
     </script>
