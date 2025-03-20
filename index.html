@@ -34,8 +34,10 @@
     <h2>Calculadora de Preço com ROAS</h2>
     
     <label for="roas">ROAS (%)</label><br>
-    <input type="number" id="roas" placeholder="Ex: 500" oninput="atualizarPorcentagem()">
-    <span id="porcentagemGasto">Gasto por venda: 0%</span><br>
+    <input type="number" id="roas" placeholder="Ex: 500" oninput="atualizarPorcentagem()"><br>
+
+    <label for="porcentagem">Porcentagem gasta por venda (%)</label><br>
+    <input type="number" id="porcentagem" placeholder="Ex: 20" oninput="atualizarRoas()"><br>
     
     <label for="preco">Preço Atual (R$)</label><br>
     <input type="number" id="preco" placeholder="Ex: 500"><br>
@@ -68,9 +70,15 @@
             let roas = parseFloat(document.getElementById("roas").value);
             if (!isNaN(roas) && roas > 0) {
                 let porcentagem = (100 / (roas + 100)) * 100;
-                document.getElementById("porcentagemGasto").innerText = Gasto por venda: ${porcentagem.toFixed(2)}%;
-            } else {
-                document.getElementById("porcentagemGasto").innerText = "Gasto por venda: 0%";
+                document.getElementById("porcentagem").value = porcentagem.toFixed(2);
+            }
+        }
+
+        function atualizarRoas() {
+            let porcentagem = parseFloat(document.getElementById("porcentagem").value);
+            if (!isNaN(porcentagem) && porcentagem > 0 && porcentagem < 100) {
+                let roas = ((100 - porcentagem) / porcentagem) * 100;
+                document.getElementById("roas").value = roas.toFixed(2);
             }
         }
     </script>
