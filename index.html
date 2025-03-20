@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Preço com ROAS</title>
+    <title>Calculadora de Preco com ROAS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,7 +36,7 @@
     <label for="roas">ROAS (%)</label><br>
     <input type="number" id="roas" placeholder="Ex: 400"><br>
     
-    <label for="preco">Preco Atual (R$)</label><br>
+    <label for="preco">Valor Atual (R$)</label><br>
     <input type="number" id="preco" placeholder="Ex: 100"><br>
 
     <button id="calcular">Calcular</button>
@@ -46,4 +46,24 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("calcular").addEventListener("click", function() {
-                let roas = parseFloat(document.getElementById("
+                let roas = parseFloat(document.getElementById("roas").value);
+                let preco = parseFloat(document.getElementById("preco").value);
+
+                // Verifica se o JavaScript está funcionando
+                alert(ROAS: ${roas}, Preço: ${preco}); // Exibe um alerta com os valores dos campos
+
+                if (isNaN(roas) || isNaN(preco) || roas <= 0 || preco <= 0) {
+                    document.getElementById("resultado").innerText = "Por favor, insira valores válidos.";
+                    return;
+                }
+
+                let percentualCusto = 100 / roas;
+                let aumentoNecessario = (percentualCusto / (100 - percentualCusto)) * 100;
+                let novoPreco = preco * (1 + aumentoNecessario / 100);
+
+                document.getElementById("resultado").innerText = Novo valor: R$ ${novoPreco.toFixed(2)};
+            });
+        });
+    </script>
+</body>
+</html>
